@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Jaswanth CH — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Cabinet+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --bg:#07090f;
+  --c1:#6c63ff;--c2:#00d4aa;--c3:#ff6b9d;--c4:#ffd166;
+  --glass:rgba(255,255,255,0.04);
+  --glass-border:rgba(255,255,255,0.08);
+  --text:#e8edf5;--muted:#6b7a99;
+}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg);color:var(--text);
+  overflow-x:hidden;cursor:none;
+}
+
+/* ─── CURSOR ─── */
+#cur{
+  position:fixed;width:10px;height:10px;
+  background:#fff;border-radius:50%;
+  pointer-events:none;z-index:9999;
+  mix-blend-mode:difference;
+  transition:width .2s,height .2s;
+}
+#cur.big{width:50px;height:50px;margin:-20px}
+body:not(:hover) #cur{opacity:0}
+
+/* ─── ORBS ─── */
+.orb{
+  position:fixed;border-radius:50%;
+  filter:blur(80px);pointer-events:none;z-index:0;
+  animation:orbFloat 8s ease-in-out infinite;
+}
+.orb1{width:500px;height:500px;background:rgba(108,99,255,.18);top:-100px;left:-100px}
+.orb2{width:400px;height:400px;background:rgba(0,212,170,.14);bottom:-100px;right:-100px;animation-delay:-4s}
+.orb3{width:300px;height:300px;background:rgba(255,107,157,.1);top:50%;left:60%;animation-delay:-2s}
+@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-30px) scale(1.05)}}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:1.2rem;left:50%;transform:translateX(-50%);
+  z-index:100;
+  background:rgba(7,9,15,.6);
+  backdrop-filter:blur(24px);
+  border:1px solid var(--glass-border);
+  border-radius:999px;
+  padding:.7rem 2rem;
+  display:flex;align-items:center;gap:2.5rem;
+}
+.nav-logo{
+  font-family:'Syne',sans-serif;
+  font-weight:800;font-size:.95rem;
+  background:linear-gradient(135deg,var(--c1),var(--c2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{
+  color:var(--muted);text-decoration:none;
+  font-size:.82rem;font-weight:500;
+  transition:color .2s;letter-spacing:.02em;
+}
+.nav-links a:hover{color:var(--text)}
+.nav-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--c2);box-shadow:0 0 10px var(--c2);
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+
+/* ─── HERO ─── */
+#hero{
+  min-height:100vh;position:relative;z-index:2;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;text-align:center;
+  padding:8rem 2rem 4rem;overflow:hidden;
+}
+.hero-chip{
+  display:inline-flex;align-items:center;gap:.6rem;
+  background:rgba(108,99,255,.12);
+  border:1px solid rgba(108,99,255,.3);
+  border-radius:999px;padding:.4rem 1.1rem;
+  font-size:.75rem;font-weight:500;color:var(--c1);
+  letter-spacing:.06em;text-transform:uppercase;
+  margin-bottom:2rem;
+  animation:chipIn .6s ease both;
+}
+.hero-chip span{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--c2);box-shadow:0 0 8px var(--c2);
+  animation:pulse 1.5s infinite;
+}
+@keyframes chipIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+.hero-name{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(3.5rem,9vw,8rem);
+  font-weight:800;line-height:.95;
+  letter-spacing:-.04em;
+  animation:nameIn .8s .1s ease both;
+}
+@keyframes nameIn{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
+.hero-name .line1{
+  background:linear-gradient(135deg,#fff 0%,rgba(255,255,255,.7) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  display:block;
+}
+.hero-name .line2{
+  background:linear-gradient(135deg,var(--c1),var(--c2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  display:block;
+}
+
+.hero-sub{
+  font-size:1.05rem;color:var(--muted);
+  max-width:520px;margin:.2rem auto 0;
+  font-weight:300;line-height:1.7;
+  animation:nameIn .8s .25s ease both;
+}
+
+.hero-btns{
+  display:flex;gap:1rem;margin-top:2.5rem;
+  justify-content:center;flex-wrap:wrap;
+  animation:nameIn .8s .35s ease both;
+}
+.mag-btn{
+  position:relative;padding:.85rem 2.2rem;
+  border-radius:999px;font-size:.88rem;font-weight:500;
+  text-decoration:none;overflow:hidden;
+  transition:transform .15s,box-shadow .3s;
+  display:inline-block;
+}
+.mag-btn-fill{
+  background:linear-gradient(135deg,var(--c1),var(--c2));
+  color:#fff;
+}
+.mag-btn-fill:hover{box-shadow:0 8px 40px rgba(108,99,255,.5)}
+.mag-btn-ghost{
+  background:var(--glass);
+  border:1px solid var(--glass-border);color:var(--text);
+  backdrop-filter:blur(10px);
+}
+.mag-btn-ghost:hover{border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.07)}
+
+/* floating stats */
+.hero-stats{
+  display:flex;gap:3rem;margin-top:4rem;
+  animation:nameIn .8s .45s ease both;
+}
+.hstat{text-align:center}
+.hstat-n{
+  font-family:'Syne',sans-serif;
+  font-size:2.4rem;font-weight:800;
+  background:linear-gradient(135deg,#fff,rgba(255,255,255,.6));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hstat-l{font-size:.72rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-top:.2rem}
+
+/* floating badges */
+.float-badge{
+  position:absolute;
+  background:rgba(7,9,15,.7);
+  border:1px solid var(--glass-border);
+  backdrop-filter:blur(20px);
+  border-radius:16px;padding:.8rem 1.2rem;
+  font-size:.78rem;pointer-events:none;
+  animation:floatBadge 4s ease-in-out infinite;
+}
+.fb1{top:20%;left:5%;animation-delay:0s}
+.fb2{top:25%;right:6%;animation-delay:-2s}
+.fb3{bottom:28%;left:4%;animation-delay:-1s}
+.fb4{bottom:22%;right:5%;animation-delay:-3s}
+@keyframes floatBadge{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.fb-icon{font-size:1.2rem;margin-bottom:.3rem}
+.fb-label{color:var(--muted);font-size:.7rem}
+.fb-val{color:var(--text);font-weight:500}
+
+/* ─── GLASS SECTION WRAPPER ─── */
+.section-wrap{
+  position:relative;z-index:2;
+  padding:7rem 2rem;
+  max-width:1200px;margin:0 auto;
+}
+.sec-label{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--c2);font-weight:600;margin-bottom:.7rem;
+}
+.sec-label::before{content:'';width:24px;height:1px;background:var(--c2)}
+h2.sh{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(2rem,4vw,3rem);
+  font-weight:800;letter-spacing:-.03em;color:#fff;
+  margin-bottom:.5rem;
+}
+.sec-divider{
+  width:100%;height:1px;
+  background:linear-gradient(90deg,var(--glass-border),transparent);
+  margin:1.5rem 0 3rem;
+}
+
+/* ─── SKILLS ─── */
+#skills-sec{background:linear-gradient(180deg,var(--bg) 0%,#0c0e18 100%)}
+.skills-layout{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.skill-group-card{
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  border-radius:20px;padding:2rem;
+  backdrop-filter:blur(20px);
+  transition:border-color .3s,transform .3s,box-shadow .3s;
+}
+.skill-group-card:hover{
+  border-color:rgba(108,99,255,.3);
+  transform:translateY(-4px);
+  box-shadow:0 20px 60px rgba(108,99,255,.12);
+}
+.sgc-title{
+  font-family:'Syne',sans-serif;
+  font-size:.8rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--c1);
+  margin-bottom:1.5rem;display:flex;align-items:center;gap:.6rem;
+}
+.sgc-title::after{content:'';flex:1;height:1px;background:rgba(108,99,255,.2)}
+
+/* SKILL BAR */
+.skill-bar-item{margin-bottom:1.2rem}
+.skill-bar-item:last-child{margin-bottom:0}
+.sb-top{display:flex;justify-content:space-between;margin-bottom:.5rem}
+.sb-name{font-size:.85rem;color:var(--text);font-weight:500}
+.sb-pct{
+  font-size:.75rem;color:var(--muted);
+  transition:color .3s;font-family:monospace;
+}
+.sb-track{
+  height:6px;background:rgba(255,255,255,.06);
+  border-radius:999px;overflow:visible;position:relative;
+}
+.sb-fill{
+  height:100%;border-radius:999px;width:0%;
+  background:linear-gradient(90deg,var(--c1),var(--c2));
+  transition:width 1.2s cubic-bezier(.23,1,.32,1);
+  position:relative;
+}
+.sb-fill::after{
+  content:'';
+  position:absolute;right:-1px;top:50%;transform:translateY(-50%);
+  width:12px;height:12px;border-radius:50%;
+  background:#fff;box-shadow:0 0 10px var(--c1),0 0 20px var(--c2);
+  opacity:0;transition:opacity .3s .8s;
+}
+.sb-fill.done::after{opacity:1}
+.skill-bar-item:hover .sb-fill{
+  filter:brightness(1.2);
+  box-shadow:0 0 16px rgba(108,99,255,.5);
+}
+.skill-bar-item:hover .sb-pct{color:var(--c2)}
+/* grow on hover */
+.skill-bar-item:hover .sb-track{height:10px}
+.skill-bar-item:hover .sb-fill::after{width:16px;height:16px}
+.sb-track{transition:height .2s}
+.sb-fill::after{transition:opacity .3s .8s,width .2s,height .2s}
+
+/* ─── EXPERIENCE ─── */
+#exp-sec{background:#0c0e18}
+.exp-cards{display:flex;flex-direction:column;gap:1.5rem}
+.exp-card{
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  border-radius:20px;padding:2.2rem 2.5rem;
+  backdrop-filter:blur(20px);
+  position:relative;overflow:hidden;
+  transition:border-color .3s,transform .3s;
+  transform-style:preserve-3d;
+}
+.exp-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--c1),var(--c2),var(--c3));
+  opacity:0;transition:opacity .3s;
+}
+.exp-card:hover{border-color:rgba(108,99,255,.3);transform:translateY(-3px)}
+.exp-card:hover::before{opacity:1}
+.exp-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.2rem;flex-wrap:wrap;gap:1rem}
+.exp-role{
+  font-family:'Syne',sans-serif;
+  font-size:1.1rem;font-weight:700;color:#fff;
+}
+.exp-company{
+  font-size:.85rem;color:var(--c2);
+  font-weight:500;margin-top:.2rem;
+}
+.exp-date{
+  background:rgba(108,99,255,.12);
+  border:1px solid rgba(108,99,255,.2);
+  border-radius:999px;padding:.3rem .9rem;
+  font-size:.75rem;color:var(--c1);font-weight:500;
+  white-space:nowrap;
+}
+.exp-pills{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.2rem}
+.exp-pill{
+  background:rgba(255,255,255,.05);
+  border:1px solid var(--glass-border);
+  border-radius:6px;padding:.25rem .7rem;
+  font-size:.72rem;color:var(--muted);
+  transition:background .2s,color .2s;
+}
+.exp-card:hover .exp-pill{background:rgba(108,99,255,.1);color:var(--text);border-color:rgba(108,99,255,.2)}
+.exp-list{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.exp-list li{
+  font-size:.88rem;color:var(--muted);padding-left:1.3rem;position:relative;line-height:1.65;
+  transition:color .2s;
+}
+.exp-list li::before{content:'→';position:absolute;left:0;color:var(--c1);font-size:.75rem;top:.2rem}
+.exp-card:hover .exp-list li{color:rgba(232,237,245,.8)}
+
+/* ─── PROJECTS ─── */
+#proj-sec{background:linear-gradient(180deg,#0c0e18,var(--bg))}
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.proj-card{
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  border-radius:20px;padding:1.8rem;
+  backdrop-filter:blur(20px);
+  position:relative;overflow:hidden;
+  transition:border-color .3s,box-shadow .3s;
+  transform-style:preserve-3d;
+  cursor:default;
+  display:flex;flex-direction:column;gap:.8rem;
+}
+.proj-card .glow-spot{
+  position:absolute;width:150px;height:150px;
+  border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(108,99,255,.2),transparent 70%);
+  transition:opacity .3s;opacity:0;
+  transform:translate(-50%,-50%);
+}
+.proj-card:hover .glow-spot{opacity:1}
+.proj-card:hover{border-color:rgba(108,99,255,.3);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.pc-num{
+  font-family:'Syne',sans-serif;
+  font-size:.72rem;color:var(--muted);letter-spacing:.1em;
+}
+.pc-icon{font-size:1.8rem}
+.pc-title{
+  font-family:'Syne',sans-serif;
+  font-size:.98rem;font-weight:700;color:#fff;line-height:1.3;
+}
+.pc-desc{font-size:.82rem;color:var(--muted);line-height:1.65;flex:1}
+.pc-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.4rem}
+.pc-tag{
+  font-size:.68rem;padding:.2rem .6rem;
+  background:rgba(0,212,170,.08);
+  border:1px solid rgba(0,212,170,.2);
+  border-radius:5px;color:var(--c2);
+  transition:background .2s;
+}
+.proj-card:hover .pc-tag{background:rgba(0,212,170,.15)}
+
+/* ─── CONTACT ─── */
+#contact-sec{background:var(--bg)}
+.contact-glass{
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  border-radius:28px;padding:4rem;
+  backdrop-filter:blur(30px);
+  text-align:center;position:relative;overflow:hidden;
+}
+.contact-glass::before{
+  content:'';position:absolute;
+  top:-100px;left:50%;transform:translateX(-50%);
+  width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(108,99,255,.12),transparent 70%);
+  pointer-events:none;
+}
+.contact-glass h3{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(1.8rem,4vw,3rem);
+  font-weight:800;color:#fff;margin-bottom:1rem;
+}
+.contact-glass p{color:var(--muted);max-width:480px;margin:0 auto 2.5rem;line-height:1.7;font-weight:300}
+.contact-links{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center}
+.c-link{
+  display:flex;align-items:center;gap:.7rem;
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--glass-border);
+  border-radius:14px;padding:.9rem 1.8rem;
+  color:var(--text);text-decoration:none;
+  font-size:.88rem;font-weight:500;
+  transition:background .3s,border-color .3s,transform .2s,box-shadow .3s;
+  backdrop-filter:blur(10px);
+}
+.c-link:hover{
+  background:rgba(108,99,255,.12);
+  border-color:rgba(108,99,255,.4);
+  transform:translateY(-3px);
+  box-shadow:0 12px 40px rgba(108,99,255,.2);
+}
+.c-link.primary{
+  background:linear-gradient(135deg,var(--c1),var(--c2));
+  border-color:transparent;color:#fff;
+}
+.c-link.primary:hover{box-shadow:0 12px 40px rgba(108,99,255,.4);filter:brightness(1.1)}
+
+/* ─── FOOTER ─── */
+footer{
+  border-top:1px solid var(--glass-border);
+  padding:2rem;text-align:center;
+  font-size:.78rem;color:var(--muted);
+  position:relative;z-index:2;
+}
+
+/* ─── REVEAL ─── */
+.rev{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+.rev.in{opacity:1;transform:none}
+.rev-left{opacity:0;transform:translateX(-32px);transition:opacity .7s ease,transform .7s ease}
+.rev-left.in{opacity:1;transform:none}
+
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:rgba(108,99,255,.4);border-radius:2px}
+
+@media(max-width:900px){
+  .skills-layout{grid-template-columns:1fr}
+  .proj-grid{grid-template-columns:1fr 1fr}
+  nav{padding:.6rem 1.2rem;gap:1.5rem}
+  .nav-links{display:none}
+  .float-badge{display:none}
+  .hero-stats{gap:2rem}
+  .contact-glass{padding:2rem}
+}
+@media(max-width:600px){
+  .proj-grid{grid-template-columns:1fr}
+  .hero-stats{gap:1.2rem}
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cur"></div>
+
+<!-- ORBS -->
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Jaswanth.CH</div>
+  <ul class="nav-links">
+    <li><a href="#skills-sec">Skills</a></li>
+    <li><a href="#exp-sec">Experience</a></li>
+    <li><a href="#proj-sec">Projects</a></li>
+    <li><a href="#contact-sec">Contact</a></li>
+  </ul>
+  <div class="nav-dot"></div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <!-- floating badges -->
+  <div class="float-badge fb1"><div class="fb-icon">⚡</div><div class="fb-label">Power Platform</div><div class="fb-val">Expert</div></div>
+  <div class="float-badge fb2"><div class="fb-icon">🏅</div><div class="fb-label">Certifications</div><div class="fb-val">MS-900 · PL-900 · AZ-900</div></div>
+  <div class="float-badge fb3"><div class="fb-icon">📍</div><div class="fb-label">Location</div><div class="fb-val">Cleveland, OH</div></div>
+  <div class="float-badge fb4"><div class="fb-icon">🎓</div><div class="fb-label">MS IT — GPA</div><div class="fb-val">3.84 / 4.0</div></div>
+
+  <div class="hero-chip"><span></span>Open to new opportunities</div>
+  <h1 class="hero-name">
+    <span class="line1">Jaswanth CH</span>
+    <span class="line2">M365 Engineer</span>
+  </h1>
+  <p class="hero-sub">SharePoint Developer · Power Platform Architect · Copilot Studio Builder<br/>5 years turning Microsoft 365 into real business solutions.</p>
+  <div class="hero-btns">
+    <a href="#proj-sec" class="mag-btn mag-btn-fill">View Projects</a>
+    <a href="#contact-sec" class="mag-btn mag-btn-ghost">Get in Touch</a>
+    <a href="#" class="mag-btn mag-btn-ghost" id="cvBtn">Download CV ↓</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-n" data-count="5">0</div><div class="hstat-l">Years Exp.</div></div>
+    <div class="hstat"><div class="hstat-n" data-count="3">0</div><div class="hstat-l">Certifications</div></div>
+    <div class="hstat"><div class="hstat-n" data-count="6">0</div><div class="hstat-l">Major Projects</div></div>
+    <div class="hstat"><div class="hstat-n" data-count="348">0</div><div class="hstat-l">LinkedIn Connections</div></div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<div id="skills-sec">
+<div class="section-wrap">
+  <div class="sec-label rev">Technical Expertise</div>
+  <h2 class="sh rev">Skills that <span style="background:linear-gradient(135deg,var(--c1),var(--c2));-webkit-background-clip:text;-webkit-text-fill-color:transparent">deliver results</span></h2>
+  <div class="sec-divider"></div>
+  <div class="skills-layout">
+
+    <div class="skill-group-card rev">
+      <div class="sgc-title">SharePoint & SPFx</div>
+      <div class="skill-bar-item" data-pct="92">
+        <div class="sb-top"><span class="sb-name">SPFx / Application Customizers</span><span class="sb-pct">0%</span></div>
+        <div class="sb-track"><div class="sb-fill"></div></div>
+      </div>
+      <div class="skill-bar-item" data-pct="88">
+        <div class="sb-top"><span class="sb-name">SharePoint REST API / CSOM</span><span class="sb-pct">0%</span></div>
+        <div class="sb-track"><div class="sb-fill"></div></div>
+      </div>
+      <div class="skill-bar-item" data-pct="85">
+        <div class="sb-top"><span class="sb-name">PnP Online / Modern SharePoint</span><span class="sb-pct">0%</span></div>
+        <div class="sb-track"><div class="sb-fill"></div></div>
+      </div>
+      <div class="skill-bar-item" data-pct="80">
+        <div class="sb-top"><span class="sb-name">Microsoft Graph API</span><span class="sb-pct">0%</span></div>
+        <div class="sb-track"><div class="sb-fill"></div></div>
+      </div>
+    </div>
+
+    <div class="skill-group-card rev">
+      <div class="sgc-title">Power Platform</div>
+      <div class="skill-bar-item" data-pct="90">
+        <div class="sb-top"><span class="sb-name">Power Apps (Canvas & Model-driven)</span><span class="sb-pct">0%</span></div>
+        <div class="sb-track"><div class="sb-fill"></div></div>
+      </div>
+      <div class="skill-bar-item" data-pct="88">
+        <div class="sb-top"><span class="sb-name">Power Automate</span><span class="sb-pct">0%</span></div>
+        <div class="sb-track"><div class="sb-fill"></div></div>
+      </div>
+      <div class="skill-bar-item" data-pct="82">
+        <div class="sb-top"><span class="sb-name">Copilot Studio / AI Agents</span><span class="sb-pct">0%</span></div>
+        <div class="sb-track"><div class="sb-fill"></div></div>
+      </div>
+      <div class="skill-bar-item" data-pct="78">
+        <div class="sb-top"><span class="sb-name">Power BI / Power Fx</span><span class="sb-pct">0%</span></div>
+        <div class="sb-track"><div class="sb-fill"></div></div>
+      </div>
+    </div>
+
+    <div class="skill-group-card rev">
+      <div class="sgc-title">Frontend Development</div>
+      <div class="skill-bar-item" data-pct="90">
+        <div class="sb-top"><span class="sb-name">TypeScript / JavaScript</span><span class="sb-pct">0%</span></div>
+        <div class="sb-track"><div class="sb-fill"></div></div>
+      </div>
+      <div class="skill-bar-item" data-pct="87">
+        <div class="sb-top"><span class="sb-name">React / Fluent UI</span><span class="sb-pct">0%</span></div>
+        <div class="sb-track"><div class="sb-fill"></div></div>
+      </div>
+      <div class="skill-bar-item" data-pct="83">
+        <div class="sb-top"><span class="sb-name">HTML5 / CSS3 / SCSS</span><span class="sb-pct">0%</span></div>
+        <div class="sb-track"><div class="sb-fill"></div></div>
+      </div>
+      <div class="skill-bar-item" data-pct="70">
+        <div class="sb-top"><span class="sb-name">React Native (Expo)</span><span class="sb-pct">0%</span></div>
+        <div class="sb-track"><div class="sb-fill"></div></div>
+      </div>
+    </div>
+
+    <div class="skill-group-card rev">
+      <div class="sgc-title">Backend & Cloud</div>
+      <div class="skill-bar-item" data-pct="82">
+        <div class="sb-top"><span class="sb-name">C# / .NET</span><span class="sb-pct">0%</span></div>
+        <div class="sb-track"><div class="sb-fill"></div></div>
+      </div>
+      <div class="skill-bar-item" data-pct="80">
+        <div class="sb-top"><span class="sb-name">PowerShell / PnP</span><span class="sb-pct">0%</span></div>
+        <div class="sb-track"><div class="sb-fill"></div></div>
+      </div>
+      <div class="skill-bar-item" data-pct="78">
+        <div class="sb-top"><span class="sb-name">SQL Server / Oracle DB</span><span class="sb-pct">0%</span></div>
+        <div class="sb-track"><div class="sb-fill"></div></div>
+      </div>
+      <div class="skill-bar-item" data-pct="72">
+        <div class="sb-top"><span class="sb-name">Azure AD / Entra / Functions</span><span class="sb-pct">0%</span></div>
+        <div class="sb-track"><div class="sb-fill"></div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- EXPERIENCE -->
+<div id="exp-sec">
+<div class="section-wrap">
+  <div class="sec-label rev">Work History</div>
+  <h2 class="sh rev">Where I've <span style="background:linear-gradient(135deg,var(--c2),var(--c3));-webkit-background-clip:text;-webkit-text-fill-color:transparent">built things</span></h2>
+  <div class="sec-divider"></div>
+  <div class="exp-cards">
+
+    <div class="exp-card rev">
+      <div class="exp-card-top">
+        <div>
+          <div class="exp-role">SharePoint Admin / Developer</div>
+          <div class="exp-company">Park Place Technologies · USA</div>
+        </div>
+        <div class="exp-date">Oct 2025 — Present</div>
+      </div>
+      <div class="exp-pills">
+        <span class="exp-pill">SharePoint Online</span><span class="exp-pill">Power BI</span><span class="exp-pill">Microsoft Purview</span>
+        <span class="exp-pill">Entra ID</span><span class="exp-pill">PowerShell</span><span class="exp-pill">PnP Online</span><span class="exp-pill">Teams</span>
+      </div>
+      <ul class="exp-list">
+        <li>Administer M365 platforms — SharePoint Online, OneDrive, Teams, Exchange Online, and Entra ID — managing platform health, user experience, and cross-system integrations across enterprise environments.</li>
+        <li>Support data protection and compliance using Microsoft Purview — managing DLP policies, retention policies, governance-compliant site deletion workflows, and Teams data lifecycle management.</li>
+        <li>Configure SSO integrations and manage Entra ID application registrations for agency SaaS/CRM platforms, ensuring secure access across vendor-hosted cloud systems.</li>
+        <li>Build and validate Power BI dashboards and operational reports for leadership, integrating Dataverse data with dynamic filters, slicers, and visualizations for data accuracy and actionable insights.</li>
+        <li>Manage access, permissions, security groups, and RBAC governance across M365 using Entra ID; handle Exchange Online mailbox requests, shared mailboxes, distribution groups, and user lifecycle management.</li>
+        <li>Troubleshoot advanced M365 issues across SharePoint, OneDrive sync, Teams, and permissions — using PowerShell, PnP Online, and CSOM to automate admin tasks and remediate tenant-wide issues.</li>
+        <li>Redesign legacy SharePoint intranet environments into modern, governance-aligned collaboration platforms with clear navigation, metadata structure, and information architecture best practices.</li>
+      </ul>
+    </div>
+
+    <div class="exp-card rev">
+      <div class="exp-card-top">
+        <div>
+          <div class="exp-role">AI Developer Intern</div>
+          <div class="exp-company">Impacter AI · Remote</div>
+        </div>
+        <div class="exp-date">Jun 2025 — Oct 2025</div>
+      </div>
+      <div class="exp-pills">
+        <span class="exp-pill">Python</span><span class="exp-pill">OpenAI APIs</span><span class="exp-pill">Azure Functions</span>
+        <span class="exp-pill">React / .NET</span><span class="exp-pill">RESTful APIs</span><span class="exp-pill">SQL</span><span class="exp-pill">Agile</span>
+      </div>
+      <ul class="exp-list">
+        <li>Designed and deployed intelligent AI agents using Python and OpenAI APIs to automate B2B sales workflows, integrating seamlessly with web platforms.</li>
+        <li>Built backend logic using Azure Functions with clean architecture principles, integrating with React/.NET applications for seamless front-to-back communication.</li>
+        <li>Designed and developed RESTful APIs to connect AI-driven backend services with web applications using microservices architecture.</li>
+        <li>Built responsive marketing landing pages using HTML, CSS (SASS), and JavaScript with animations and interactive elements to enhance user engagement.</li>
+        <li>Wrote SQL queries for data retrieval and transformation; used Git for version control and code reviews.</li>
+        <li>Participated in full Agile ceremonies — daily stand-ups, sprint planning, sprint reviews, and retrospectives.</li>
+      </ul>
+    </div>
+
+    <div class="exp-card rev">
+      <div class="exp-card-top">
+        <div>
+          <div class="exp-role">Associate Software Engineer</div>
+          <div class="exp-company">Hexaware Technologies · India</div>
+        </div>
+        <div class="exp-date">Jan 2020 — Aug 2023</div>
+      </div>
+      <div class="exp-pills">
+        <span class="exp-pill">SharePoint Online</span><span class="exp-pill">Power Automate</span><span class="exp-pill">CSOM</span>
+        <span class="exp-pill">.NET</span><span class="exp-pill">Jira / Agile</span><span class="exp-pill">Governance</span>
+      </div>
+      <ul class="exp-list">
+        <li>Administered M365 environments for enterprise clients — managing SharePoint Online sites, permission levels, access governance, and security groups across multi-program environments.</li>
+        <li>Built end-to-end automation with Power Automate and SharePoint improving processing accuracy by 80%; configured governance policies and compliance workflows aligned with organizational standards.</li>
+        <li>Implemented SharePoint site design, metadata structures, and governance frameworks — Site Columns, Content Types, Document Libraries, and Lists — ensuring scalable information architecture across enterprise environments.</li>
+        <li>Collaborated cross-functionally to produce technical documentation and support materials, improving operational consistency and platform adoption across teams.</li>
+        <li>Participated in Agile/Scrum via Jira — sprint planning, backlog grooming, and iterative .NET-based SharePoint development.</li>
+        <li>Ensured platform availability by proactively identifying and resolving site issues, maintaining high uptime SLAs.</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- PROJECTS -->
+<div id="proj-sec">
+<div class="section-wrap">
+  <div class="sec-label rev">Portfolio</div>
+  <h2 class="sh rev">Featured <span style="background:linear-gradient(135deg,var(--c1),var(--c3));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Projects</span></h2>
+  <div class="sec-divider"></div>
+  <div class="proj-grid">
+    <div class="proj-card rev">
+      <div class="glow-spot"></div>
+      <div class="pc-num">01</div>
+      <div class="pc-icon">🚀</div>
+      <div class="pc-title">SPFx Floating Navigation Hub</div>
+      <div class="pc-desc">Application Customizer on the corporate SharePoint home site — floating action button that opens a hover navigation popup with custom branding and SCSS.</div>
+      <div class="pc-tags"><span class="pc-tag">SPFx</span><span class="pc-tag">TypeScript</span><span class="pc-tag">React</span><span class="pc-tag">SCSS</span></div>
+    </div>
+    <div class="proj-card rev">
+      <div class="glow-spot"></div>
+      <div class="pc-num">02</div>
+      <div class="pc-icon">🤖</div>
+      <div class="pc-title">Copilot Studio AI Agent</div>
+      <div class="pc-desc">Conversational AI agent connected to SharePoint as its knowledge source — employees query internal docs using natural language instead of searching manually.</div>
+      <div class="pc-tags"><span class="pc-tag">Copilot Studio</span><span class="pc-tag">SharePoint</span><span class="pc-tag">Graph API</span></div>
+    </div>
+    <div class="proj-card rev">
+      <div class="glow-spot"></div>
+      <div class="pc-num">03</div>
+      <div class="pc-icon">📬</div>
+      <div class="pc-title">Multi-Mailbox Email Ingestion</div>
+      <div class="pc-desc">Power Automate solution capturing emails from 5 mailboxes, routing to SharePoint Document Library with structured metadata: Sender, Subject, Source, Timestamp.</div>
+      <div class="pc-tags"><span class="pc-tag">Power Automate</span><span class="pc-tag">SharePoint</span><span class="pc-tag">Exchange Online</span></div>
+    </div>
+    <div class="proj-card rev">
+      <div class="glow-spot"></div>
+      <div class="pc-num">04</div>
+      <div class="pc-icon">📑</div>
+      <div class="pc-title">Sticky Tab Navigation Customizer</div>
+      <div class="pc-desc">Extended an existing SPFx Application Customizer to add sticky horizontal-tab navigation — carefully merged without breaking prior functionality.</div>
+      <div class="pc-tags"><span class="pc-tag">SPFx</span><span class="pc-tag">TypeScript</span><span class="pc-tag">CSS</span></div>
+    </div>
+    <div class="proj-card rev">
+      <div class="glow-spot"></div>
+      <div class="pc-num">05</div>
+      <div class="pc-icon">⚡</div>
+      <div class="pc-title">Power Platform Governance</div>
+      <div class="pc-desc">Enterprise DLP policy design, service account management, and environment provisioning standards — full governance framework for a multi-environment org.</div>
+      <div class="pc-tags"><span class="pc-tag">Power Platform Admin</span><span class="pc-tag">DLP</span><span class="pc-tag">Azure AD</span></div>
+    </div>
+    <div class="proj-card rev">
+      <div class="glow-spot"></div>
+      <div class="pc-num">06</div>
+      <div class="pc-icon">📱</div>
+      <div class="pc-title">BudgetSplit — Mobile App</div>
+      <div class="pc-desc">Personal side project: React Native app for shared household expense tracking with receipt scanning and OCR integration. Built with Expo + TypeScript.</div>
+      <div class="pc-tags"><span class="pc-tag">React Native</span><span class="pc-tag">Expo</span><span class="pc-tag">TypeScript</span><span class="pc-tag">OCR</span></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- CONTACT -->
+<div id="contact-sec">
+<div class="section-wrap">
+  <div class="contact-glass rev">
+    <h3>Let's build something<br/><span style="background:linear-gradient(135deg,var(--c1),var(--c2));-webkit-background-clip:text;-webkit-text-fill-color:transparent">together</span></h3>
+    <p>Open to SharePoint Developer, Power Platform Developer/Architect, M365 Solutions Engineer, and related Microsoft ecosystem roles. Remote, hybrid, or on-site in Cleveland.</p>
+    <div class="contact-links">
+      <a href="mailto:your@email.com" class="c-link primary">✉ Email Me</a>
+      <a href="https://linkedin.com/in/jaswanthchv1" target="_blank" class="c-link">🔗 LinkedIn</a>
+      <a href="https://github.com/jaswanthchv1-ai" target="_blank" class="c-link">⌨ GitHub</a>
+    </div>
+    <p style="margin-top:2rem;font-size:.78rem;color:var(--muted)">📍 Cleveland, OH · Open to remote & hybrid</p>
+  </div>
+</div>
+</div>
+
+<footer>Jaswanth CH · SharePoint & M365 Solutions Engineer · Cleveland, OH</footer>
+
+<script>
+/* ── CURSOR ── */
+const cur=document.getElementById('cur');
+document.addEventListener('mousemove',e=>{
+  cur.style.left=e.clientX-5+'px';
+  cur.style.top=e.clientY-5+'px';
+});
+document.querySelectorAll('a,button,.proj-card,.exp-card,.skill-bar-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cur.classList.add('big'));
+  el.addEventListener('mouseleave',()=>cur.classList.remove('big'));
+});
+
+/* ── MAGNETIC BUTTONS ── */
+document.querySelectorAll('.mag-btn').forEach(btn=>{
+  btn.addEventListener('mousemove',e=>{
+    const r=btn.getBoundingClientRect();
+    const dx=e.clientX-r.left-r.width/2;
+    const dy=e.clientY-r.top-r.height/2;
+    btn.style.transform=`translate(${dx*.25}px,${dy*.3}px)`;
+  });
+  btn.addEventListener('mouseleave',()=>btn.style.transform='');
+});
+
+/* ── HERO PARALLAX ── */
+document.addEventListener('mousemove',e=>{
+  const cx=e.clientX/window.innerWidth-.5;
+  const cy=e.clientY/window.innerHeight-.5;
+  document.querySelectorAll('.float-badge').forEach((b,i)=>{
+    const d=(i%2===0?1:-1)*(i<2?18:12);
+    b.style.transform=`translate(${cx*d}px,${cy*d}px)`;
+  });
+  document.querySelector('.orb1').style.transform=`translate(${cx*40}px,${cy*40}px)`;
+  document.querySelector('.orb2').style.transform=`translate(${cx*-30}px,${cy*-30}px)`;
+  document.querySelector('.orb3').style.transform=`translate(${cx*25}px,${cy*25}px)`;
+});
+
+/* ── 3D TILT ON PROJECT CARDS ── */
+document.querySelectorAll('.proj-card').forEach(card=>{
+  const glow=card.querySelector('.glow-spot');
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const x=e.clientX-r.left,y=e.clientY-r.top;
+    const cx=r.width/2,cy=r.height/2;
+    const rx=(y-cy)/cy*10,ry=(cx-x)/cx*10;
+    card.style.transform=`perspective(600px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-5px)`;
+    if(glow){glow.style.left=x+'px';glow.style.top=y+'px'}
+  });
+  card.addEventListener('mouseleave',()=>{
+    card.style.transform='';
+  });
+});
+
+/* ── EXPERIENCE CARD TILT ── */
+document.querySelectorAll('.exp-card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const x=e.clientX-r.left,y=e.clientY-r.top;
+    const cx=r.width/2,cy=r.height/2;
+    const rx=(y-cy)/cy*4,ry=(cx-x)/cx*4;
+    card.style.transform=`perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-3px)`;
+  });
+  card.addEventListener('mouseleave',()=>card.style.transform='');
+});
+
+/* ── SCROLL REVEAL ── */
+const ro=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('in'),i*80);
+    }
+  });
+},{threshold:.08});
+document.querySelectorAll('.rev,.rev-left').forEach(el=>ro.observe(el));
+
+/* ── SKILL BARS ── */
+const skillObs=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const card=entry.target;
+      card.querySelectorAll('.skill-bar-item').forEach((item,i)=>{
+        const pct=parseInt(item.dataset.pct);
+        setTimeout(()=>{
+          const fill=item.querySelector('.sb-fill');
+          const label=item.querySelector('.sb-pct');
+          fill.style.width=pct+'%';
+          fill.classList.add('done');
+          // animate counter
+          let start=0;
+          const step=()=>{
+            start+=2;
+            if(start>=pct){label.textContent=pct+'%';return}
+            label.textContent=start+'%';
+            requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        },i*150+200);
+      });
+      skillObs.unobserve(card);
+    }
+  });
+},{threshold:.2});
+document.querySelectorAll('.skill-group-card').forEach(c=>skillObs.observe(c));
+
+/* skill bar hover → grow percent */
+document.querySelectorAll('.skill-bar-item').forEach(item=>{
+  const pct=parseInt(item.dataset.pct);
+  const fill=item.querySelector('.sb-fill');
+  const label=item.querySelector('.sb-pct');
+  item.addEventListener('mouseenter',()=>{
+    fill.style.width=Math.min(pct+5,100)+'%';
+    label.style.color='var(--c2)';
+    label.textContent=pct+'%';
+  });
+  item.addEventListener('mouseleave',()=>{
+    fill.style.width=pct+'%';
+    label.style.color='';
+  });
+});
+
+/* ── COUNTER ANIMATION FOR STATS ── */
+const statsObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      document.querySelectorAll('.hstat-n').forEach(el=>{
+        const target=parseInt(el.dataset.count);
+        let cur=0;const dur=1200;const step=dur/target;
+        const t=setInterval(()=>{
+          cur++;
+          el.textContent=cur+(target>=100?'':target===5?'+':'');
+          if(cur>=target)clearInterval(t);
+        },step);
+      });
+      statsObs.disconnect();
+    }
+  });
+},{threshold:.5});
+const heroStats=document.querySelector('.hero-stats');
+if(heroStats)statsObs.observe(heroStats);
+
+/* ── CV BUTTON ── */
+document.getElementById('cvBtn').addEventListener('click',e=>{
+  e.preventDefault();
+  alert('Upload your resume PDF to GitHub and replace this link with:\nhref="your-resume.pdf"\ndownload="Jaswanth_CH_Resume.pdf"');
+});
+</script>
+</body>
+</html>
